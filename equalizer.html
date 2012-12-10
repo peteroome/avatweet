@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Equalizer</title>
+</head>
+<body style="background:black;">
+	<canvas width="1000" height="500" id="myCanvas"></canvas>
+	<script>
+		var myCanvas = document.getElementById("myCanvas");
+		var ctx = myCanvas.getContext("2d");
+
+		var x = 100;
+		var y = 300;
+		var noBars = 10;
+		var start = 300;
+		var ySpeed = 10;
+		var size = ySpeed;
+
+		function getRandomInt(min, max){
+		    return Math.floor(Math.random() * (max - min + 1)) + min;
+		};
+
+		for(var i = 0; i<noBars; i++){
+			setupBar(i);
+		};
+
+		function setupBar(i){
+			var bar = {
+				x : x * i,
+				y : y,
+				finish : ySpeed * Math.round(getRandomInt(50, 200)/ySpeed),
+				colour : 'hsl(' + Math.random() * 50 + ',100%, 50%)',
+				direction : "up"
+			};
+
+			setInterval(draw, 30);
+
+			function draw(){
+				if(bar.y == bar.finish){
+					bar.direction = "down";
+				} else if(bar.y == start){
+					bar.direction = "up";
+				};
+
+				if(bar.direction == "up"){
+					ctx.fillStyle = bar.colour;
+					ctx.fillRect(bar.x, bar.y,100,size);
+					bar.y = bar.y - ySpeed;	
+				};
+
+				if(bar.direction == "down"){
+					ctx.fillStyle = "black";
+					ctx.fillRect(bar.x, bar.y,100,size);
+					bar.y = bar.y + ySpeed;	
+				};
+		    };
+		};
+	</script>
+</body>
+</html>

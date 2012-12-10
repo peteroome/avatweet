@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Circles</title>
+</head>
+<body style="background: black;">
+	<canvas width="1000" height="500" id="myCanvas"></canvas>
+	<script>
+		var myCanvas = document.getElementById("myCanvas");
+		var ctx = myCanvas.getContext("2d");
+		
+		var x = 50;
+		var y = 50;
+
+		setInterval(draw, 400);
+
+		function draw() {
+			var circle = { 
+				radiusSpeed : Math.random() * 10 - 5,
+				size : 10,
+				colour : 'red'
+			};
+
+			setTimeout(function(){
+				for(var i = 1; i<21; i++){
+					ctx.clearRect(0, 0, 1000, 1000);
+					ctx.fillStyle = 'hsl(' + Math.random() * 500 + ',100%, 50%)';
+					ctx.fillRect(x,y,circle.size * i,circle.size * i);
+				};
+			}, 4000);
+	    };x
+	</script>
+</body>
+</html>

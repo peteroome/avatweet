@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Pixels</title>
+</head>
+<body style="background:black;">
+	<canvas width="1000" height="500" id="myCanvas"></canvas>
+	<script>
+		var myCanvas = document.getElementById("myCanvas");
+		var ctx = myCanvas.getContext("2d");
+		
+		var pixels = [];
+
+		setInterval(draw, 30);
+
+		function draw() {
+			var pixel = { 
+				x : Math.random() * 1000,
+				y : Math.random() * 500,
+				xSpeed : Math.random() * 10 - 5,
+				ySpeed : Math.random() * 10 - 5,
+				size : Math.random() * 150 - 50,
+				colour : 'hsl(' + Math.random() * 500 + ',100%, 50%)'
+			};
+			pixels.push(pixel);
+
+			ctx.clearRect(0, 0, 1000, 1000);
+
+			for(var i = 0; i<pixels.length; i++){
+				pixel = pixels[i];
+
+				ctx.fillStyle = pixel.colour;
+				ctx.fillRect(pixel.x,pixel.y,pixel.size,pixel.size);
+
+				pixel.x = pixel.x + pixel.xSpeed;
+				pixel.y = pixel.y + pixel.ySpeed;
+				pixel.size = pixel.size * 0.99;
+			};
+
+			if(pixels.length > 500){
+				pixels.shift();
+			};
+	    };
+	</script>
+</body>
+</html>
